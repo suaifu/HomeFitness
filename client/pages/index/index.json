@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "上门健身",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "privacy-popup": "/components/privacy-popup/privacy-popup"
+  }
+}

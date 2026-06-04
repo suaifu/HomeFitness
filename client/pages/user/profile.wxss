@@ -1,0 +1,23 @@
+/* pages/user/profile.wxss */
+
+.login-prompt { display: flex; flex-direction: column; align-items: center; padding: 120rpx 0; }
+.avatar-placeholder { width: 160rpx; height: 160rpx; border-radius: 50%; background: var(--border); margin-bottom: 30rpx; }
+
+.profile-header { display: flex; align-items: center; padding: 30rpx; }
+.profile-avatar { width: 120rpx; height: 120rpx; border-radius: 50%; margin-right: 24rpx; }
+.profile-info { flex: 1; }
+
+.stats-row { display: flex; justify-content: space-around; text-align: center; }
+.stat-item { display: flex; flex-direction: column; }
+.stat-value { font-size: 36rpx; font-weight: 700; color: var(--primary); }
+.stat-label { font-size: 22rpx; color: var(--text-light); margin-top: 6rpx; }
+
+.menu-item { display: flex; align-items: center; justify-content: space-between; padding: 28rpx 0; border-bottom: 1rpx solid var(--border); }
+.menu-item:last-child { border-bottom: none; }
+.menu-left { display: flex; align-items: center; }
+.menu-icon { font-size: 36rpx; margin-right: 20rpx; }
+.menu-title { font-size: 30rpx; }
+.menu-right { display: flex; align-items: center; }
+.menu-badge { background: var(--error); color: white; font-size: 20rpx; padding: 4rpx 12rpx; border-radius: 16rpx; margin-right: 12rpx; }
+
+.logout-btn { text-align: center; padding: 30rpx; color: var(--error); font-size: 30rpx; margin-top: 30rpx; border-radius: 16rpx; background: white; }

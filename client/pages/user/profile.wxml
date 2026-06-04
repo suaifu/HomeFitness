@@ -1,0 +1,73 @@
+<!--pages/user/profile.wxml-->
+<view class="container">
+  <view wx:if="{{!userInfo}}" class="login-prompt">
+    <view class="avatar-placeholder"></view>
+    <text class="text-secondary mb-30">登录后享受更多服务</text>
+    <view class="btn-primary" bindtap="login">微信登录</view>
+  </view>
+
+  <block wx:else>
+    <!-- 用户信息卡 -->
+    <view class="card mb-30 profile-header" bindtap="onUserInfoTap">
+      <image class="profile-avatar" src="{{userInfo.avatar_url || userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="profile-info">
+        <text class="profile-name text-lg font-bold">{{userInfo.nickname || userInfo.nickName || '微信用户'}}</text>
+        <text class="text-sm text-light">编辑个人资料 ></text>
+      </view>
+    </view>
+
+    <!-- 统计 -->
+    <view class="card mb-30 stats-row">
+      <view class="stat-item" bindtap="onMenuItemTap" data-id="appointments" data-url="/pages/user-center/appointments/appointments">
+        <text class="stat-value">{{stats.totalAppointments}}</text>
+        <text class="stat-label">预约次数</text>
+      </view>
+      <view class="stat-item" bindtap="onMenuItemTap" data-id="coaches" data-url="/pages/user-center/coaches/coaches">
+        <text class="stat-value">{{stats.totalCoaches}}</text>
+        <text class="stat-label">我的教练</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">¥{{stats.totalAmount}}</text>
+        <text class="stat-label">累计消费</text>
+      </view>
+    </view>
+
+    <!-- 菜单列表 -->
+    <view class="card mb-30">
+      <view wx:for="{{menuItems}}" wx:key="id" class="menu-item" bindtap="onMenuItemTap" data-id="{{item.id}}" data-url="{{item.url}}">
+        <view class="menu-left">
+          <text class="menu-icon">{{item.icon}}</text>
+          <text class="menu-title">{{item.title}}</text>
+        </view>
+        <view class="menu-right">
+          <text wx:if="{{item.badge}}" class="menu-badge">{{item.badge}}</text>
+          <text class="iconfont icon-right text-light"></text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 设置 -->
+    <view class="card mb-30">
+      <view class="menu-item" bindtap="onSettingToggle" data-setting="notifications">
+        <view class="menu-left"><text class="menu-icon">🔔</text><text class="menu-title">消息通知</text></view>
+        <switch checked="{{settings.notifications}}" color="#FF6B6B" />
+      </view>
+      <view class="menu-item" bindtap="onSettingToggle" data-setting="locationService">
+        <view class="menu-left"><text class="menu-icon">📍</text><text class="menu-title">位置服务</text></view>
+        <switch checked="{{settings.locationService}}" color="#FF6B6B" />
+      </view>
+    </view>
+
+    <!-- 其他 -->
+    <view class="card mb-30">
+      <view class="menu-item" bindtap="onAboutUs"><view class="menu-left"><text class="menu-icon">ℹ️</text><text class="menu-title">关于我们</text></view><text class="iconfont icon-right text-light"></text></view>
+      <view class="menu-item" bindtap="onCheckUpdate"><view class="menu-left"><text class="menu-icon">🔄</text><text class="menu-title">检查更新</text></view><text class="text-sm text-light">v{{version}}</text></view>
+      <view class="menu-item" bindtap="onClearCache"><view class="menu-left"><text class="menu-icon">🗑️</text><text class="menu-title">清除缓存</text></view><text class="iconfont icon-right text-light"></text></view>
+      <view class="menu-item" bindtap="onPrivacyPolicy"><view class="menu-left"><text class="menu-icon">🔒</text><text class="menu-title">隐私政策</text></view><text class="iconfont icon-right text-light"></text></view>
+      <view class="menu-item" bindtap="onUserAgreement"><view class="menu-left"><text class="menu-icon">📄</text><text class="menu-title">用户协议</text></view><text class="iconfont icon-right text-light"></text></view>
+    </view>
+
+    <!-- 退出登录 -->
+    <view class="logout-btn" bindtap="onLogout">退出登录</view>
+  </block>
+</view>

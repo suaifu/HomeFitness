@@ -1,0 +1,19 @@
+<!-- 占位组件 - 教练卡片 -->
+<view class="coach-card-placeholder">
+  <view class="card-header">
+    <view class="avatar"></view>
+    <view class="info">
+      <view class="name"></view>
+      <view class="title"></view>
+    </view>
+  </view>
+  <view class="card-tags">
+    <view class="tag"></view>
+    <view class="tag"></view>
+    <view class="tag"></view>
+  </view>
+  <view class="card-footer">
+    <view class="rating"></view>
+    <view class="price"></view>
+  </view>
+</view>

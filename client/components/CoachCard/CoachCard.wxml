@@ -1,0 +1,59 @@
+<!-- components/CoachCard/CoachCard.wxml - 教练卡片组件 -->
+<!-- 卡片模式 -->
+<view wx:if="{{mode === 'card'}}" class="coach-card" bindtap="onTap">
+  <image class="coach-avatar" src="{{coach.avatar_url || defaultAvatar}}" mode="aspectFill" lazy-load></image>
+  <view class="coach-info">
+    <view class="flex-between">
+      <text class="coach-name text-lg text-dark font-medium">{{coach.name}}</text>
+      <view class="rating">
+        <text class="rating-star">★</text>
+        <text class="rating-score">{{coach.rating}}</text>
+      </view>
+    </view>
+    <text class="coach-specialty text-sm text-light mb-10">{{coach.specialty}}</text>
+    <text wx:if="{{showDistance && coach.service_area}}" class="coach-distance text-sm text-light">📍 {{coach.service_area}}</text>
+    <view class="flex-between mt-20">
+      <text class="price">¥{{coach.price}}<text class="price-unit">/课时</text></text>
+      <view wx:if="{{showBooking}}" class="btn-outline btn-small" catchtap="onBookingTap">预约</view>
+    </view>
+  </view>
+</view>
+
+<!-- 简约模式 -->
+<view wx:elif="{{mode === 'simple'}}" class="coach-simple" bindtap="onTap">
+  <image class="coach-avatar-sm" src="{{coach.avatar_url || defaultAvatar}}" mode="aspectFill" lazy-load></image>
+  <view class="coach-simple-info">
+    <text class="coach-name text-md text-dark font-medium">{{coach.name}}</text>
+    <view class="rating">
+      <text class="rating-star">★</text>
+      <text class="rating-score">{{coach.rating}}</text>
+      <text class="text-sm text-light ml-10">{{coach.order_count || 0}}次服务</text>
+    </view>
+  </view>
+  <view class="coach-price-col">
+    <text class="price">¥{{coach.price}}</text>
+    <view wx:if="{{showBooking}}" class="btn-outline btn-small" catchtap="onBookingTap">预约</view>
+  </view>
+</view>
+
+<!-- 横向模式 -->
+<view wx:elif="{{mode === 'horizontal'}}" class="coach-horizontal card" bindtap="onTap">
+  <image class="coach-avatar-md" src="{{coach.avatar_url || defaultAvatar}}" mode="aspectFill" lazy-load></image>
+  <view class="coach-horizontal-info">
+    <view class="flex-between mb-10">
+      <text class="coach-name text-lg text-dark font-medium">{{coach.name}}</text>
+      <view class="rating">
+        <text class="rating-star">★</text>
+        <text class="rating-score">{{coach.rating}}</text>
+      </view>
+    </view>
+    <text class="coach-intro text-sm text-secondary">{{coach.intro}}</text>
+    <view class="coach-tags mb-10">
+      <text wx:for="{{coach.specialtyList}}" wx:key="index" wx:for-item="tag" class="tag tag-primary mr-10 mb-10">{{tag}}</text>
+    </view>
+    <view class="flex-between">
+      <text class="price">¥{{coach.price}}<text class="price-unit">/课时</text></text>
+      <text wx:if="{{showDistance && coach.service_area}}" class="text-sm text-light">📍 {{coach.service_area}}</text>
+    </view>
+  </view>
+</view>

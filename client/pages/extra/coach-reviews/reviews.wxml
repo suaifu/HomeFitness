@@ -1,0 +1,92 @@
+<!-- pages/coach/reviews/reviews.wxml -->
+<view class="container">
+  <!-- 评分概览 -->
+  <view class="stats-card">
+    <view class="stats-left">
+      <view class="avg-score">{{stats.avg_rating || '0.0'}}</view>
+      <view class="total-count">共{{stats.total}}条评价</view>
+      <star-rating value="{{stats.avg_rating || 0}}" size="24rpx" readonly />
+    </view>
+    <view class="stats-right">
+      <view
+        wx:for="{{[5, 4, 3, 2, 1]}}"
+        wx:key="{{item}}"
+        class="distribution-item"
+      >
+        <text class="star-label">{{item}}星</text>
+        <view class="progress-bar">
+          <view
+            class="progress-fill"
+            style="width: {{distributionPercent[item] || 0}}%"
+          ></view>
+        </view>
+        <text class="percent-text">{{distributionPercent[item] || 0}}%</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评价列表 -->
+  <view class="reviews-list">
+    <view
+      wx:for="{{reviews}}"
+      wx:key="id"
+      class="review-item"
+    >
+      <view class="review-header">
+        <view class="user-info">
+          <image
+            class="avatar"
+            src="{{item.user_avatar || '/images/default-avatar.png'}}"
+            mode="aspectFill"
+          />
+          <view class="user-detail">
+            <text class="username">{{item.user_name || '匿名用户'}}</text>
+            <star-rating
+              value="{{item.rating}}"
+              size="20rpx"
+              readonly
+            />
+          </view>
+        </view>
+        <text class="review-time">{{formatTime(item.created_at)}}</text>
+      </view>
+
+      <!-- 标签 -->
+      <view wx:if="{{item.tags}}" class="review-tags">
+        <text
+          wx:for="{{item._formattedTags}}"
+          wx:key="{{index}}"
+          class="tag"
+        >{{item}}</text>
+      </view>
+
+      <!-- 内容 -->
+      <view wx:if="{{item.content}}" class="review-content">
+        {{item.content}}
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view wx:if="{{loading}}" class="loading-more">
+      <text>加载中...</text>
+    </view>
+
+    <!-- 没有更多 -->
+    <view wx:elif="{{!hasMore && reviews.length > 0}}" class="no-more">
+      <text>没有更多评价了</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{!loading && reviews.length === 0}}" class="empty-state">
+      <image src="/images/empty-reviews.png" mode="aspectFit" class="empty-icon" />
+      <text class="empty-text">暂无评价</text>
+      <text class="empty-hint">成为第一个评价的人吧</text>
+      <button class="btn-evaluate" bindtap="onGoEvaluate">立即评价</button>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-bar">
+    <button class="btn-write-review" bindtap="onGoEvaluate">写评价</button>
+  </view>
+</view>

@@ -1,0 +1,177 @@
+/* pages/index/index.wxss - 优化版 */
+
+/* 轮播图样式 */
+.swiper {
+  height: 360rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.swiper-image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 搜索栏 */
+.search-bar {
+  border-radius: 40rpx !important;
+  padding: 20rpx 30rpx !important;
+}
+
+/* 分类样式 */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 16rpx;
+  background: white;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.category-item:active {
+  transform: scale(0.96);
+}
+
+.category-icon {
+  font-size: 56rpx;
+  margin-bottom: 8rpx;
+}
+
+.category-name {
+  color: #333;
+}
+
+/* 教练滚动区域 */
+.coach-scroll {
+  white-space: nowrap;
+  width: 100%;
+  padding-bottom: 20rpx;
+}
+
+.coach-card {
+  display: inline-block;
+  width: 480rpx;
+  margin-right: 24rpx;
+  background: white;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  vertical-align: top;
+  transition: transform 0.2s;
+}
+
+.coach-card:active {
+  transform: scale(0.98);
+}
+
+.coach-card:last-child {
+  margin-right: 0;
+}
+
+.coach-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-bottom: 16rpx;
+  background: #f0f0f0;
+}
+
+.coach-name {
+  font-size: 30rpx;
+}
+
+.coach-title {
+  font-size: 24rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+/* 课程卡片 */
+.course-card {
+  display: flex;
+  background: white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.course-image {
+  width: 200rpx;
+  height: 180rpx;
+}
+
+.course-info {
+  flex: 1;
+  padding: 30rpx;
+}
+
+.course-title {
+  font-size: 32rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* ============ 骨架屏样式 ============ */
+.skeleton-page {
+  padding: 0;
+}
+
+.skeleton-box {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8rpx;
+}
+
+.skeleton-circle {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  padding: 10rpx 0;
+}
+
+.skeleton-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx;
+  background: white;
+  border-radius: 16rpx;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============ 动画 ============ */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 位置图标 */
+.location-icon {
+  font-size: 28rpx;
+}

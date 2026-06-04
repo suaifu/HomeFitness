@@ -1,0 +1,2 @@
+/* pages/user/coaches.wxss */
+.coach-stats { display: flex; padding: 16rpx 0; border-top: 1rpx solid var(--border); border-bottom: 1rpx solid var(--border); }

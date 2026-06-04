@@ -1,0 +1,111 @@
+<!--pages/index/index.wxml - 优化版：骨架屏 + 懒加载 + 错误重试-->
+<view class="container">
+
+  <!-- 骨架屏 -->
+  <view wx:if="{{showSkeleton}}" class="skeleton-page">
+    <view class="skeleton-header flex-between mb-40">
+      <view class="skeleton-box" style="width:200rpx;height:40rpx;"></view>
+      <view class="skeleton-circle"></view>
+    </view>
+    <view class="skeleton-box mb-40" style="height:80rpx;border-radius:40rpx;"></view>
+    <view class="skeleton-box mb-40" style="height:400rpx;border-radius:16rpx;"></view>
+    <view class="skeleton-box mb-20" style="width:160rpx;height:40rpx;"></view>
+    <view class="skeleton-grid">
+      <view wx:for="{{[1,2,3,4,5,6]}}" wx:key="*this" class="skeleton-grid-item">
+        <view class="skeleton-circle"></view>
+        <view class="skeleton-box" style="width:80rpx;height:28rpx;margin-top:12rpx;"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载失败 -->
+  <view wx:elif="{{loadFailed}}" class="empty-state">
+    <text class="empty-icon">😞</text>
+    <text class="empty-text">加载失败，请检查网络</text>
+    <view class="btn-primary" bindtap="onRetryLoad">重新加载</view>
+  </view>
+
+  <!-- 正常内容 -->
+  <view wx:else>
+    <!-- 顶部栏 -->
+    <view class="flex-between mb-40">
+      <!-- 位置 -->
+      <view class="flex-center" bindtap="onLocationTap">
+        <text class="location-icon mr-10">📍</text>
+        <text class="text-md text-dark">{{currentLocation}}</text>
+        <text class="ml-10" style="font-size:20rpx;">▼</text>
+      </view>
+
+      <!-- 用户头像 -->
+      <view bindtap="onUserTap">
+        <image wx:if="{{userInfo}}" src="{{userInfo.avatar_url || userInfo.avatarUrl}}" class="avatar avatar-small" mode="aspectFill"></image>
+        <view wx:else class="avatar avatar-small flex-center" style="background: #FF6B6B; color: white; font-size:28rpx;">
+          <text>👤</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 搜索框 -->
+    <view class="card mb-40 search-bar" bindtap="onSearchTap">
+      <view class="flex-center">
+        <text class="mr-20 text-light" style="font-size:32rpx;">🔍</text>
+        <text class="text-md text-light">搜索教练、课程或健身类型</text>
+      </view>
+    </view>
+
+    <!-- 轮播图 -->
+    <swiper wx:if="{{banners.length}}" class="swiper mb-40" indicator-dots autoplay circular interval="3000" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#FFFFFF">
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <image class="swiper-image" src="{{item.image_url}}" mode="aspectFill" bindtap="onQuickBooking"></image>
+      </swiper-item>
+    </swiper>
+
+    <!-- 健身分类 -->
+    <view class="mb-40">
+      <view class="section-title mb-20">健身分类</view>
+      <view class="categories">
+        <view wx:for="{{categories}}" wx:key="id" class="category-item" bindtap="onCategoryTap" data-category="{{item}}">
+          <view class="category-icon">{{item.icon}}</view>
+          <text class="category-name text-center text-md mt-10">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 热门教练 -->
+    <view class="mb-40" wx:if="{{hotCoaches.length}}">
+      <view class="flex-between mb-20">
+        <view class="section-title">热门教练</view>
+        <view class="text-primary text-md" bindtap="onViewAllCoaches">查看全部 ></view>
+      </view>
+
+      <scroll-view class="coach-scroll" scroll-x enable-flex>
+        <view wx:for="{{hotCoaches}}" wx:key="id" class="coach-card" bindtap="onCoachTap" data-id="{{item.id}}">
+          <image class="coach-avatar" src="{{item.avatar_url}}" mode="aspectFill" lazy-load></image>
+          <view class="coach-info">
+            <view class="flex-between">
+              <text class="coach-name text-lg text-dark font-medium">{{item.name}}</text>
+              <view class="rating">
+                <text class="rating-star">★</text>
+                <text class="rating-score">{{item.rating}}</text>
+              </view>
+            </view>
+            <text class="coach-title text-sm text-light mb-10">{{item.specialty}}</text>
+            <view class="flex-between mt-20">
+              <text class="price">¥{{item.price}}<text class="price-unit">/课时</text></text>
+              <view class="btn-outline btn-small">预约</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 无数据提示 -->
+    <view wx:if="{{!loading && !hotCoaches.length}}" class="empty-state" style="padding:80rpx 60rpx;">
+      <text class="empty-icon">🏋️</text>
+      <text class="empty-text">暂无教练数据</text>
+    </view>
+  </view>
+</view>
+
+<!-- 隐私授权弹窗 -->
+<privacy-popup />

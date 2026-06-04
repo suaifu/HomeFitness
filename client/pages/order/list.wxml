@@ -1,0 +1,91 @@
+<!--pages/order/list.wxml-->
+<view class="container">
+  <!-- 状态标签栏 -->
+  <view class="status-tabs">
+    <view
+      wx:for="{{statusTabs}}"
+      wx:key="value"
+      class="tab-item {{currentStatus === item.value ? 'active' : ''}}"
+      data-status="{{item.value}}"
+      bindtap="onTabChange"
+    >
+      {{item.label}}
+      <view wx:if="{{item.count}}" class="tab-badge">{{item.count}}</view>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 加载失败 -->
+  <view wx:elif="{{loadFailed}}" class="empty-state">
+    <text class="empty-icon">!</text>
+    <text class="empty-text">加载失败，请重试</text>
+    <view class="btn-primary" bindtap="onRetry">重新加载</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{orders.length === 0}}" class="empty-state">
+    <text class="empty-icon">📋</text>
+    <text class="empty-text">{{currentStatus === 'all' ? '暂无订单' : '该状态下暂无订单'}}</text>
+    <view class="btn-primary" bindtap="onGoBooking">去预约教练</view>
+  </view>
+
+  <!-- 订单列表 -->
+  <block wx:else>
+    <view
+      wx:for="{{orders}}"
+      wx:key="id"
+      class="order-card"
+      data-id="{{item.id}}"
+      bindtap="onOrderTap"
+    >
+      <!-- 订单头部：订单号 + 状态 -->
+      <view class="order-header">
+        <text class="order-id">订单号: {{item.id}}</text>
+        <text class="order-status" style="color: {{item.statusColor}}">{{item.statusText}}</text>
+      </view>
+
+      <!-- 订单内容：教练头像 + 信息 -->
+      <view class="order-content">
+        <image
+          class="order-avatar"
+          src="{{item.coachAvatar || '/images/default-avatar.png'}}"
+          mode="aspectFill"
+          lazy-load
+        />
+        <view class="order-info">
+          <text class="order-title">{{item.courseTitle || '私教课程'}}</text>
+          <text class="order-coach">{{item.coachName}} 教练</text>
+          <text class="order-time">{{item.date}} {{item.time}}</text>
+        </view>
+        <view class="order-price">
+          <text class="price">¥{{item.total}}</text>
+        </view>
+      </view>
+
+      <!-- 订单操作按钮 -->
+      <view class="order-actions" wx:if="{{item.status === 0 || item.status === 1}}">
+        <view
+          wx:if="{{item.status === 0}}"
+          class="btn-outline btn-small"
+          data-id="{{item.id}}"
+          catchtap="onCancelOrder"
+        >取消订单</view>
+        <view
+          wx:if="{{item.status === 0}}"
+          class="btn-primary btn-small"
+          data-id="{{item.id}}"
+          catchtap="onPayOrder"
+        >去支付</view>
+        <view
+          wx:if="{{item.status === 1}}"
+          class="btn-outline btn-small"
+        >联系教练</view>
+      </view>
+    </view>
+  </block>
+</view>

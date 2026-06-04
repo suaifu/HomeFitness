@@ -1,0 +1,16 @@
+/* pages/order/detail.wxss */
+.status-card { text-align: center; padding: 40rpx; }
+.status-card.paid { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); color: white; }
+.status-card.pending_payment { background: linear-gradient(135deg, #FAAD14, #FFD666); color: white; }
+.status-card.completed { background: linear-gradient(135deg, #52C41A, #73D13D); color: white; }
+.status-card.cancelled { background: linear-gradient(135deg, #999, #BBB); color: white; }
+.status-text { font-size: 36rpx; font-weight: 700; }
+
+.info-row { display: flex; justify-content: space-between; padding: 20rpx 0; border-bottom: 1rpx solid var(--border); }
+.info-row:last-child { border-bottom: none; }
+.info-label { color: var(--text-secondary); }
+.info-value { color: var(--text-dark); }
+.total-row { border-top: 2rpx solid var(--border); margin-top: 10rpx; padding-top: 24rpx; }
+
+.actions { display: flex; justify-content: space-around; padding: 30rpx; gap: 30rpx; }
+.actions .btn-outline, .actions .btn-primary { flex: 1; text-align: center; }

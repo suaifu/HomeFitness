@@ -1,0 +1,39 @@
+<!--pages/user/favorites/favorites.wxml-->
+<view class="container">
+  <!-- 加载态 -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{isEmpty}}" class="empty-state">
+    <image class="empty-image" src="/images/empty-data.png" mode="aspectFit"></image>
+    <text class="empty-title">还没有收藏的教练</text>
+    <text class="empty-desc">去发现专业教练，收藏方便下次找到</text>
+    <view class="btn-primary" bindtap="onBrowseCoaches">去找教练</view>
+  </view>
+
+  <!-- 收藏列表 -->
+  <block wx:else>
+    <view wx:for="{{favorites}}" wx:key="id" class="card mb-20 favorite-card">
+      <view class="fav-main" bindtap="onCoachTap" data-id="{{item.id}}">
+        <image class="fav-avatar" src="{{item.avatar || '/images/default-coach.png'}}" mode="aspectFill"></image>
+        <view class="fav-info">
+          <text class="fav-name font-bold">{{item.name}}</text>
+          <text class="fav-specialty text-sm text-light">{{item.specialty || item.title || '专业私教'}}</text>
+          <view class="fav-meta">
+            <view class="rating">
+              <text class="star-active">★</text>
+              <text class="rating-score">{{item.rating || '5.0'}}</text>
+            </view>
+            <text class="fav-price">¥{{item.price}}<text class="price-unit">/课时</text></text>
+          </view>
+        </view>
+      </view>
+      <view class="fav-remove" bindtap="onRemoveFavorite" data-id="{{item.id}}" data-index="{{index}}">
+        <text class="remove-icon">✕</text>
+      </view>
+    </view>
+  </block>
+</view>

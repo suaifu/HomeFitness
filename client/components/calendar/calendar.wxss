@@ -1,0 +1,111 @@
+/* components/calendar/calendar.wxss */
+.calendar {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+/* 头部 */
+.calendar-header {
+  margin-bottom: 24rpx;
+}
+
+.month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-btn {
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 40rpx;
+  color: #FF6B6B;
+}
+
+.nav-btn:active {
+  opacity: 0.6;
+}
+
+.month-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 星期标题 */
+.week-header {
+  display: flex;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.week-day {
+  flex: 1;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 日期网格 */
+.days-grid {
+  padding-top: 8rpx;
+}
+
+.week-row {
+  display: flex;
+  margin-bottom: 8rpx;
+}
+
+.week-row:last-child {
+  margin-bottom: 0;
+}
+
+.day-cell {
+  flex: 1;
+  height: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.day-cell.empty {
+  background: transparent;
+}
+
+.day-cell.disabled {
+  opacity: 0.3;
+}
+
+.day-cell.selected {
+  background: #FF6B6B;
+  border-radius: 50%;
+}
+
+.day-cell.today {
+  border: 2rpx solid #FF6B6B;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.day-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.day-cell.selected .day-text {
+  color: #fff;
+}
+
+.today-dot {
+  width: 6rpx;
+  height: 6rpx;
+  background: #FF6B6B;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 12rpx;
+}

@@ -1,0 +1,94 @@
+/* 教练卡片占位组件样式 */
+.coach-card-placeholder {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  margin-right: 20rpx;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  width: 150rpx;
+  height: 40rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 8rpx;
+  margin-bottom: 12rpx;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+.title {
+  width: 100rpx;
+  height: 28rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 8rpx;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+.card-tags {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.tag {
+  width: 100rpx;
+  height: 48rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 24rpx;
+  margin-right: 16rpx;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  width: 120rpx;
+  height: 32rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 8rpx;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+.price {
+  width: 100rpx;
+  height: 36rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 8rpx;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

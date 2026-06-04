@@ -1,0 +1,104 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/coach/list",
+    "pages/coach/detail",
+    "pages/order/list",
+    "pages/user/profile"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/user-center",
+      "name": "user",
+      "pages": [
+        "appointments/appointments",
+        "coaches/coaches",
+        "favorites/favorites",
+        "address/address",
+        "address/edit/edit",
+        "settings/settings",
+        "coupons/coupons"
+      ]
+    },
+    {
+      "root": "pages/extra",
+      "name": "extra",
+      "pages": [
+        "coach-reviews/reviews",
+        "coach-evaluate/evaluate",
+        "course-booking/booking",
+        "course-confirm/confirm",
+        "order-detail/detail",
+        "privacy/privacy",
+        "agreement/agreement"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "network": "all",
+      "packages": ["user"]
+    },
+    "pages/user/profile": {
+      "network": "wifi",
+      "packages": ["extra"]
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF6B6B",
+    "navigationBarTitleText": "上门健身",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F5F5",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF6B6B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/coach/list",
+        "text": "教练",
+        "iconPath": "images/tab-coach.png",
+        "selectedIconPath": "images/tab-coach-active.png"
+      },
+      {
+        "pagePath": "pages/order/list",
+        "text": "订单",
+        "iconPath": "images/tab-order.png",
+        "selectedIconPath": "images/tab-order-active.png"
+      },
+      {
+        "pagePath": "pages/user/profile",
+        "text": "我的",
+        "iconPath": "images/tab-user.png",
+        "selectedIconPath": "images/tab-user-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于预约上门服务"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
+  "__usePrivacyCheck__": true,
+  "useExtendedLib": {
+    "weui": true
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

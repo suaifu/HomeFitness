@@ -1,0 +1,19 @@
+<!--components/privacy-popup/privacy-popup.wxml-->
+<view class="privacy-mask" wx:if="{{innerShow || show}}" bindtap="onDisagree">
+  <view class="privacy-dialog" catchtap>
+    <view class="privacy-header">
+      <text class="privacy-title">用户隐私保护提示</text>
+    </view>
+    <view class="privacy-body">
+      <text class="privacy-text">感谢您使用上门健身！我们将严格遵守相关法律法规，保护您的个人信息安全。</text>
+      <text class="privacy-text">在使用服务前，我们需要获取您的位置信息用于预约上门服务，以及使用微信授权进行登录。</text>
+      <view class="privacy-link" bindtap="onViewPrivacy">
+        <text class="link-text">查看《隐私政策》</text>
+      </view>
+    </view>
+    <view class="privacy-footer">
+      <view class="btn-disagree" bindtap="onDisagree">拒绝</view>
+      <view class="btn-agree" bindtap="onAgree">同意</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,29 @@
+<!--pages/order/detail.wxml-->
+<view class="container">
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+  </view>
+  <block wx:elif="{{order}}">
+    <view class="card mb-30 status-card {{order.status}}">
+      <text class="status-text">{{order.statusText}}</text>
+    </view>
+    <view class="card mb-30">
+      <text class="section-title mb-20">预约信息</text>
+      <view class="info-row"><text class="info-label">教练</text><text class="info-value">{{order.coachName}}</text></view>
+      <view class="info-row"><text class="info-label">课程</text><text class="info-value">{{order.courseTitle || '私教课程'}}</text></view>
+      <view class="info-row"><text class="info-label">日期</text><text class="info-value">{{order.date}}</text></view>
+      <view class="info-row"><text class="info-label">时间</text><text class="info-value">{{order.time}}</text></view>
+    </view>
+    <view class="card mb-30">
+      <text class="section-title mb-20">费用明细</text>
+      <view class="info-row total-row"><text class="info-label font-bold">合计</text><text class="price">¥{{order.total}}</text></view>
+    </view>
+    <view class="actions" wx:if="{{order.status === 'pending_payment'}}">
+      <view class="btn-outline" bindtap="onCancel">取消订单</view>
+      <view class="btn-primary" bindtap="onPay">立即支付</view>
+    </view>
+    <view class="actions" wx:elif="{{order.status === 'paid'}}">
+      <view class="btn-outline" bindtap="onContactCoach">联系教练</view>
+    </view>
+  </block>
+</view>

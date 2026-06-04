@@ -1,0 +1,57 @@
+<!-- pages/user/address/address.wxml -->
+<view class="container">
+  <!-- 地址列表 -->
+  <view class="address-list">
+    <view
+      wx:for="{{addresses}}"
+      wx:key="id"
+      class="address-item {{selectMode ? 'selectable' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="onAddressTap"
+    >
+      <view class="address-content">
+        <view class="address-header">
+          <text class="contact-name">{{item.contactName}}</text>
+          <text class="phone">{{item.phone}}</text>
+          <view wx:if="{{item.isDefault}}" class="default-tag">默认</view>
+        </view>
+        <text class="address-detail">{{item.province}}{{item.city}}{{item.district}}{{item.detail}}</text>
+        <text wx:if="{{item.tag}}" class="address-tag">{{item.tag}}</text>
+      </view>
+
+      <view wx:if="{{!selectMode}}" class="address-actions">
+        <view class="action-btn" data-id="{{item.id}}" catchtap="onSetDefault">
+          <text class="{{item.isDefault ? 'active' : ''}}">默认</text>
+        </view>
+        <view class="action-btn" data-id="{{item.id}}" catchtap="onEditAddress">
+          <text>编辑</text>
+        </view>
+        <view class="action-btn delete" data-id="{{item.id}}" catchtap="onDeleteAddress">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{!loading && addresses.length === 0}}" class="empty-state">
+    <image src="/images/empty-address.png" mode="aspectFit" class="empty-icon" />
+    <text class="empty-text">暂无地址</text>
+    <text class="empty-hint">添加您的收货地址，方便教练上门服务</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-bar">
+    <button class="btn-add-location" bindtap="onChooseLocation">
+      <text class="icon">📍</text> 地图选址
+    </button>
+    <button class="btn-add-manual" bindtap="onAddAddress">
+      <text class="icon">✏️</text> 手动添加
+    </button>
+  </view>
+</view>

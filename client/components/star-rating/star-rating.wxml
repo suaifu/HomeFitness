@@ -1,0 +1,41 @@
+<!-- components/star-rating/star-rating.wxml -->
+<view class="star-rating">
+  <view class="stars">
+    <view
+      wx:for="{{stars}}"
+      wx:key="index"
+      class="star-item"
+      data-index="{{item.index}}"
+      bindtap="onTap"
+    >
+      <!-- 满星 -->
+      <view
+        wx:if="{{item.status === 'full'}}"
+        class="star star-full"
+        style="width: {{size}}; height: {{size}}; font-size: {{size}};"
+      >★</view>
+
+      <!-- 半星 -->
+      <view
+        wx:elif="{{item.status === 'half'}}"
+        class="star star-half"
+        style="width: {{size}}; height: {{size}}; font-size: {{size}};"
+      >
+        <view class="star-bg">☆</view>
+        <view class="star-half-fill">★</view>
+      </view>
+
+      <!-- 空星 -->
+      <view
+        wx:else
+        class="star star-empty"
+        style="width: {{size}}; height: {{size}}; font-size: {{size}};"
+      >☆</view>
+    </view>
+  </view>
+
+  <!-- 评分文字 -->
+  <text wx:if="{{showText}}" class="rating-text">
+    {{value ? (value.toFixed(1) + '分') : '请评分'}}
+  </text>
+</view>

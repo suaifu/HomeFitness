@@ -1,0 +1,97 @@
+<!--pages/course/booking.wxml-->
+<view class="container">
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:else>
+    <!-- 课程信息 -->
+    <view class="card mb-30 course-header" wx:if="{{course}}">
+      <image class="course-image" src="{{course.image}}" mode="aspectFill"></image>
+      <view class="course-overlay">
+        <text class="course-title text-lg font-bold">{{course.title}}</text>
+        <text class="course-subtitle text-sm">{{course.subtitle}}</text>
+      </view>
+    </view>
+
+    <!-- 选择日期 -->
+    <view class="card mb-30">
+      <text class="section-title mb-20">选择日期</text>
+      <scroll-view class="date-scroll" scroll-x>
+        <view wx:for="{{availableDates}}" wx:key="date"
+          class="date-item {{selectedDate === item.date ? 'active' : ''}}"
+          bindtap="onSelectDate" data-date="{{item.date}}">
+          <text class="date-weekday">{{item.weekDay}}</text>
+          <text class="date-day">{{item.date}}</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 选择时间 -->
+    <view class="card mb-30">
+      <text class="section-title mb-20">选择时间</text>
+      <view class="time-grid">
+        <view wx:for="{{availableDates}}" wx:key="date" wx:if="{{item.date === selectedDate}}">
+          <view wx:for="{{item.timeSlots}}" wx:key="time"
+            class="time-slot {{item.available ? '' : 'disabled'}} {{selectedTime === item.time ? 'active' : ''}}"
+            bindtap="onTimeSlotTap"
+            data-time="{{item.time}}"
+            data-available="{{item.available}}">
+            <text>{{item.time}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 选择教练 -->
+    <view class="card mb-30">
+      <text class="section-title mb-20">选择教练</text>
+      <view wx:for="{{coaches}}" wx:key="id"
+        class="coach-select-item {{selectedCoach && selectedCoach.id === item.id ? 'selected' : ''}}"
+        bindtap="onSelectCoach" data-id="{{item.id}}">
+        <image class="avatar avatar-small" src="{{item.avatar}}"></image>
+        <view class="coach-select-info">
+          <text class="text-dark">{{item.name}}</text>
+          <text class="text-light text-sm">{{item.title}}</text>
+        </view>
+        <view class="rating">
+          <view class="iconfont icon-star rating-star"></view>
+          <text class="rating-score">{{item.rating}}</text>
+        </view>
+        <text class="price">¥{{item.price}}</text>
+      </view>
+    </view>
+
+    <!-- 服务地址 -->
+    <view class="card mb-30" bindtap="onSelectAddress">
+      <text class="section-title mb-20">服务地址</text>
+      <view wx:if="{{address}}" class="address-info">
+        <view class="iconfont icon-location text-primary"></view>
+        <view class="address-detail">
+          <text class="text-dark">{{address.name}} {{address.phone}}</text>
+          <text class="text-secondary text-sm">{{address.detail}}</text>
+        </view>
+      </view>
+      <view wx:else class="address-placeholder">
+        <text class="text-light">请选择上门服务地址</text>
+        <view class="iconfont icon-right"></view>
+      </view>
+    </view>
+
+    <!-- 备注 -->
+    <view class="card mb-30">
+      <text class="section-title mb-20">备注</text>
+      <textarea class="remark-input" placeholder="请输入特殊需求或备注信息" value="{{remark}}" bindinput="onRemarkInput" maxlength="200"></textarea>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="bottom-bar">
+      <view class="bottom-left">
+        <text class="text-light">合计：</text>
+        <text class="price">¥{{selectedCoach ? selectedCoach.price : course.price}}</text>
+      </view>
+      <view class="btn-primary bottom-btn" bindtap="onNext">确认预约</view>
+    </view>
+  </block>
+</view>

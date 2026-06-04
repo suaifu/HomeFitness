@@ -1,0 +1,36 @@
+/* pages/course/confirm.wxss */
+
+.container { padding-bottom: 180rpx !important; }
+
+.info-row { display: flex; justify-content: space-between; align-items: center; padding: 20rpx 0; border-bottom: 1rpx solid var(--border); }
+.info-row:last-child { border-bottom: none; }
+.info-label { color: var(--text-secondary); font-size: 28rpx; }
+.info-value { color: var(--text-dark); font-size: 28rpx; }
+.total-row { border-top: 2rpx solid var(--border); margin-top: 10rpx; padding-top: 24rpx; }
+
+/* 联系信息表单 */
+.form-item { display: flex; align-items: center; padding: 20rpx 0; border-bottom: 1rpx solid var(--border); }
+.form-item:last-child { border-bottom: none; }
+.form-label { width: 140rpx; color: var(--text-secondary); font-size: 28rpx; flex-shrink: 0; }
+.form-input { flex: 1; font-size: 28rpx; color: var(--text-dark); text-align: right; }
+
+/* 自定义勾选框 — 放大、醒目 */
+.agreement-row { display: flex; align-items: flex-start; padding: 24rpx 0; }
+.checkbox-custom {
+  width: 48rpx; height: 48rpx; min-width: 48rpx;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-right: 20rpx; margin-top: 2rpx;
+  background: #E0E0E0;
+  border: 4rpx solid #BBBBBB;
+  box-sizing: border-box;
+}
+.checkbox-custom.checked {
+  background: #FF6B6B;
+  border-color: #FF6B6B;
+}
+.check-icon { color: white; font-size: 30rpx; font-weight: 700; }
+.agreement-text { font-size: 28rpx; color: #333333; line-height: 1.6; }
+
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 20rpx 30rpx; padding-bottom: calc(20rpx + env(safe-area-inset-bottom)); background: white; box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.05); z-index: 100; }
+.bottom-btn { padding: 20rpx 60rpx; }

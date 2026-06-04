@@ -1,0 +1,83 @@
+/* components/privacy-popup/privacy-popup.wxss */
+.privacy-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.privacy-dialog {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  animation: dialogFadeIn 0.3s ease;
+}
+
+@keyframes dialogFadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.privacy-header {
+  padding: 40rpx 40rpx 20rpx;
+  text-align: center;
+}
+
+.privacy-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.privacy-body {
+  padding: 20rpx 40rpx 30rpx;
+}
+
+.privacy-text {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 16rpx;
+}
+
+.privacy-link {
+  display: inline-block;
+  margin-top: 10rpx;
+}
+
+.link-text {
+  font-size: 26rpx;
+  color: #FF6B6B;
+  text-decoration: underline;
+}
+
+.privacy-footer {
+  display: flex;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.btn-disagree {
+  flex: 1;
+  padding: 28rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  color: #999;
+  border-right: 1rpx solid #f0f0f0;
+}
+
+.btn-agree {
+  flex: 1;
+  padding: 28rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  color: #FF6B6B;
+  font-weight: 600;
+}

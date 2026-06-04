@@ -1,0 +1,78 @@
+<!--pages/course/confirm.wxml-->
+<view class="container">
+  <view wx:if="{{bookingInfo}}">
+    <!-- 预约信息确认 -->
+    <view class="card mb-30">
+      <text class="section-title mb-20">预约信息</text>
+      <view class="info-row">
+        <text class="info-label">教练</text>
+        <text class="info-value">{{bookingInfo.coachName}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">课程</text>
+        <text class="info-value">{{bookingInfo.courseTitle || '私教课程'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">日期</text>
+        <text class="info-value">{{bookingInfo.date}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">时间</text>
+        <text class="info-value">{{bookingInfo.time}}</text>
+      </view>
+    </view>
+
+    <!-- 联系信息 -->
+    <view class="card mb-30">
+      <text class="section-title mb-20">联系信息</text>
+      <view class="form-item">
+        <text class="form-label">联系人</text>
+        <input class="form-input" placeholder="请输入联系人姓名" value="{{contactName}}" bindinput="onContactNameInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">手机号</text>
+        <input class="form-input" type="number" maxlength="11" placeholder="请输入手机号" value="{{contactPhone}}" bindinput="onContactPhoneInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">服务地址</text>
+        <input class="form-input" placeholder="请输入上门地址" value="{{address}}" bindinput="onAddressInput" />
+      </view>
+    </view>
+
+    <!-- 费用明细 -->
+    <view class="card mb-30">
+      <text class="section-title mb-20">费用明细</text>
+      <view class="info-row">
+        <text class="info-label">课程费用</text>
+        <text class="info-value price">¥{{bookingInfo.totalPrice || bookingInfo.coachPrice || bookingInfo.price}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">上门服务费</text>
+        <text class="info-value">免运费</text>
+      </view>
+      <view class="info-row total-row">
+        <text class="info-label font-bold">合计</text>
+        <text class="price">¥{{bookingInfo.totalPrice || bookingInfo.coachPrice || bookingInfo.price}}</text>
+      </view>
+    </view>
+
+    <!-- 服务条款 -->
+    <view class="card mb-30">
+      <view class="agreement-row" bindtap="onToggleAgreement">
+        <view class="checkbox-custom {{agreeTerms ? 'checked' : ''}}">
+          <text wx:if="{{agreeTerms}}" class="check-icon">✓</text>
+        </view>
+        <text class="agreement-text">我已阅读并同意《上门健身服务条款》和《隐私政策》</text>
+      </view>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="bottom-bar">
+      <view class="bottom-left">
+        <text class="text-light">合计：</text>
+        <text class="price">¥{{bookingInfo.totalPrice || bookingInfo.coachPrice || bookingInfo.price}}</text>
+      </view>
+      <view class="btn-primary bottom-btn" bindtap="onConfirmBooking">确认预约</view>
+    </view>
+  </view>
+</view>

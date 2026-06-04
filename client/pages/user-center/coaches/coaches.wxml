@@ -1,0 +1,39 @@
+<!--pages/user/coaches.wxml-->
+<view class="container">
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:elif="{{coaches.length}}">
+    <view wx:for="{{coaches}}" wx:key="id" class="card mb-20 coach-card">
+      <view class="flex-between mb-20">
+        <view class="flex-center">
+          <image class="avatar avatar-small" src="{{item.avatar || item.avatar_url || '/images/default-coach.png'}}"></image>
+          <view class="ml-20">
+            <text class="text-dark font-medium">{{item.name}}</text>
+            <text class="text-light text-sm">{{item.title || item.specialty || '专业私教'}}</text>
+          </view>
+        </view>
+        <view class="rating">
+          <view class="iconfont icon-star rating-star"></view>
+          <text class="rating-score">{{item.rating}}</text>
+        </view>
+      </view>
+      <view class="coach-stats">
+        <text class="text-sm text-secondary">预约{{item.bookingCount}}次</text>
+        <text class="text-sm text-secondary ml-20">累计¥{{item.totalSpent}}</text>
+      </view>
+      <view class="flex-between mt-20">
+        <view class="btn-outline btn-small" bindtap="onContact" data-id="{{item.id}}">联系</view>
+        <view class="btn-primary btn-small" bindtap="onBook" data-id="{{item.id}}">再次预约</view>
+      </view>
+    </view>
+  </block>
+
+  <view wx:else class="empty-state">
+    <text class="empty-icon">👨‍🏫</text>
+    <text class="empty-text">还没有收藏的教练</text>
+    <view class="btn-primary" bindtap="onGoBooking">去发现教练</view>
+  </view>
+</view>

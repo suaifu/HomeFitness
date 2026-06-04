@@ -1,0 +1,197 @@
+<!--pages/coach/detail.wxml-->
+<view class="container">
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:else>
+    <!-- 教练封面 -->
+    <view class="coach-header">
+      <image class="coach-cover" src="{{coach.coverImage}}" mode="aspectFill"></image>
+      <view class="coach-header-info">
+        <image class="coach-avatar-lg" src="{{coach.avatar}}"></image>
+        <view class="coach-main-info">
+          <text class="coach-name text-lg font-bold">{{coach.name}}</text>
+          <text class="coach-title text-sm text-light">{{coach.title}}</text>
+          <view class="rating">
+            <view class="iconfont icon-star rating-star"></view>
+            <text class="rating-score">{{coach.rating}}</text>
+            <text class="text-sm text-light ml-10">({{coach.reviewCount}}条评价)</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 统计数据 -->
+    <view class="card mb-30 stats-row">
+      <view class="stat-item">
+        <text class="stat-value">{{coach.stats.completedSessions}}</text>
+        <text class="stat-label">已完成</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{coach.stats.students}}</text>
+        <text class="stat-label">学员数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{coach.stats.satisfaction}}%</text>
+        <text class="stat-label">满意度</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{coach.rating}}</text>
+        <text class="stat-label">评分</text>
+      </view>
+    </view>
+
+    <!-- Tab切换 -->
+    <view class="tabs-header">
+      <view class="tab-item {{activeTab === 'info' ? 'active' : ''}}" bindtap="onTabChange" data-tab="info">简介</view>
+      <view class="tab-item {{activeTab === 'reviews' ? 'active' : ''}}" bindtap="onTabChange" data-tab="reviews">评价</view>
+      <view class="tab-item {{activeTab === 'schedule' ? 'active' : ''}}" bindtap="onTabChange" data-tab="schedule">预约</view>
+    </view>
+
+    <!-- 简介内容 -->
+    <view wx:if="{{activeTab === 'info'}}" class="tab-content">
+      <view class="card mb-30">
+        <text class="section-title mb-20">个人简介</text>
+        <text class="text-secondary">{{coach.bio}}</text>
+      </view>
+
+      <view class="card mb-30">
+        <text class="section-title mb-20">擅长领域</text>
+        <view class="specialty-list">
+          <text wx:for="{{coach.specialties}}" wx:key="index" class="tag tag-primary mr-10 mb-10">{{item}}</text>
+        </view>
+      </view>
+
+      <view class="card mb-30">
+        <text class="section-title mb-20">资质证书</text>
+        <view wx:for="{{coach.certificates}}" wx:key="name" class="cert-item">
+          <text class="text-dark">{{item.name}}</text>
+          <text wx:if="{{item.year}}" class="text-light text-sm">{{item.year}}年获得</text>
+        </view>
+        <view wx:if="{{coach.certificates.length === 0}}" class="text-light text-sm">暂无证书信息</view>
+      </view>
+
+      <view class="card">
+        <text class="section-title mb-20">服务项目</text>
+        <view wx:for="{{coach.services}}" wx:key="name" class="service-item">
+          <view>
+            <text class="text-dark">{{item.name}}</text>
+            <text class="text-light text-sm ml-10">{{item.duration}}</text>
+          </view>
+          <text class="price">¥{{item.price}}</text>
+        </view>
+        <view wx:if="{{coach.services.length === 0}}" class="text-light text-sm">暂无服务项目</view>
+      </view>
+    </view>
+
+    <!-- 评价内容 -->
+    <view wx:if="{{activeTab === 'reviews'}}" class="tab-content">
+      <!-- 评价概览 -->
+      <view class="card review-overview mb-30">
+        <view class="overview-left">
+          <text class="overview-score">{{reviewStats.avg_rating || coach.rating || '0.0'}}</text>
+          <view class="overview-stars">
+            <text wx:for="{{overviewStars}}" wx:key="index" class="star-icon {{item ? 'active' : ''}}">★</text>
+          </view>
+          <text class="overview-total">{{reviewStats.total || 0}}条评价</text>
+        </view>
+        <view class="overview-right" bindtap="onViewAllReviews">
+          <text>查看全部</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+
+      <!-- 评价列表 -->
+      <view wx:for="{{reviews}}" wx:key="id" class="card mb-20 review-card">
+        <view class="flex-between mb-20">
+          <view class="flex-center">
+            <image class="avatar avatar-small" src="{{item.user_avatar || '/images/default-avatar.png'}}"></image>
+            <text class="text-dark ml-10">{{item.user_name || '匿名用户'}}</text>
+          </view>
+          <text class="text-light text-sm">{{item.created_at}}</text>
+        </view>
+        <view class="rating mb-10">
+          <text wx:for="{{5}}" wx:key="index" class="iconfont icon-star rating-star {{index < item.rating ? '' : 'rating-star-empty'}}">★</text>
+        </view>
+        <text wx:if="{{item.content}}" class="text-secondary mb-10">{{item.content}}</text>
+        <view wx:if="{{item._formattedTags.length > 0}}" class="review-tags">
+          <text wx:for="{{item._formattedTags}}" wx:key="index" class="tag tag-secondary mr-10">{{item}}</text>
+        </view>
+      </view>
+
+      <!-- 写评价按钮 -->
+      <view class="write-review-bar">
+        <button class="btn-write-review" bindtap="onWriteReview">写评价</button>
+      </view>
+    </view>
+
+    <!-- 预约内容 -->
+    <view wx:if="{{activeTab === 'schedule'}}" class="tab-content">
+      <!-- 日历组件 -->
+      <view class="card mb-30">
+        <text class="section-title mb-20">选择日期</text>
+        <calendar
+          selectedDate="{{calendarSelectedDate}}"
+          minDate="{{minDate}}"
+          maxDate="{{maxDate}}"
+          bind:select="onCalendarSelect"
+          bind:monthChange="onCalendarMonthChange"
+        />
+      </view>
+
+      <!-- 时间选择 -->
+      <view class="card">
+        <text class="section-title mb-20">选择时间</text>
+        <view class="time-grid">
+          <view wx:for="{{currentDateSlots}}" wx:key="time"
+            class="time-slot {{item.available ? '' : 'disabled'}} {{selectedTime === item.time ? 'active' : ''}}"
+            bindtap="onTimeSlotTap"
+            data-time="{{item.time}}"
+            data-available="{{item.available}}">
+            <text>{{item.time}}</text>
+          </view>
+        </view>
+        <view wx:if="{{selectedDateText}}" class="selected-date-hint">已选：{{selectedDateText}} {{selectedTime || '请选择时间'}}</view>
+      </view>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <view class="bottom-left">
+        <view class="price">¥{{coach.price}}<text class="price-unit">/课时</text></view>
+        <text class="text-light text-sm">{{coach.service_area}}</text>
+      </view>
+      <view class="bottom-right">
+        <view class="btn-icon-box" bindtap="onToggleFavorite">
+          <text class="fav-icon {{isFavorited ? 'fav-active' : ''}}">{{isFavorited ? '❤️' : '🤍'}}</text>
+          <text class="btn-icon-label">{{isFavorited ? '已收藏' : '收藏'}}</text>
+        </view>
+        <view class="btn-icon-box" bindtap="onShowSharePoster">
+          <text class="btn-icon-emoji">🔗</text>
+          <text class="btn-icon-label">分享</text>
+        </view>
+        <view class="btn-icon-box" bindtap="onContactCoach">
+          <text class="btn-icon-emoji">📞</text>
+          <text class="btn-icon-label">联系</text>
+        </view>
+        <view class="btn-primary bottom-btn" bindtap="onBooking">立即预约</view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 分享海报 -->
+<share-poster
+  show="{{showSharePoster}}"
+  coachName="{{coach.name}}"
+  coachAvatar="{{coach.avatar}}"
+  coachSpecialty="{{coach.specialty}}"
+  coachPrice="{{coach.price}}"
+  coachRating="{{coach.rating}}"
+  coachId="{{coachId}}"
+  scene="coach"
+  bind:close="onCloseSharePoster"
+  bind:saved="onPosterSaved"
+/>

@@ -1,0 +1,70 @@
+/* pages/coach/detail.wxss */
+
+.coach-header { position: relative; margin: -30rpx -30rpx 30rpx; }
+.coach-cover { width: 100%; height: 400rpx; }
+.coach-header-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 30rpx; background: linear-gradient(transparent, rgba(0,0,0,0.8)); display: flex; align-items: flex-end; }
+.coach-avatar-lg { width: 120rpx; height: 120rpx; border-radius: 50%; border: 4rpx solid white; margin-right: 20rpx; }
+.coach-main-info { flex: 1; }
+.coach-name { color: white; display: block; }
+.coach-title { color: rgba(255,255,255,0.8); display: block; margin: 6rpx 0; }
+
+.stats-row { display: flex; justify-content: space-around; text-align: center; }
+.stat-item { display: flex; flex-direction: column; }
+.stat-value { font-size: 36rpx; font-weight: 700; color: var(--primary); }
+.stat-label { font-size: 22rpx; color: var(--text-light); margin-top: 6rpx; }
+
+.tabs-header { display: flex; background: white; border-radius: 16rpx; margin-bottom: 30rpx; overflow: hidden; }
+.tab-item { flex: 1; text-align: center; padding: 24rpx 0; font-size: 28rpx; color: var(--text-secondary); position: relative; }
+.tab-item.active { color: var(--primary); font-weight: 600; }
+.tab-item.active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60rpx; height: 6rpx; background: var(--primary); border-radius: 3rpx; }
+
+.specialty-list { display: flex; flex-wrap: wrap; }
+.cert-item { display: flex; justify-content: space-between; padding: 20rpx 0; border-bottom: 1rpx solid var(--border); }
+.cert-item:last-child { border-bottom: none; }
+.service-item { display: flex; justify-content: space-between; align-items: center; padding: 20rpx 0; border-bottom: 1rpx solid var(--border); }
+.service-item:last-child { border-bottom: none; }
+
+.review-card { padding: 24rpx; }
+.rating-star-empty { color: var(--border); }
+.review-tags { display: flex; flex-wrap: wrap; }
+
+/* 评价概览 */
+.review-overview { display: flex; justify-content: space-between; align-items: center; }
+.overview-left { display: flex; flex-direction: column; align-items: center; }
+.overview-score { font-size: 64rpx; font-weight: 700; color: var(--primary); }
+.overview-stars { display: flex; margin: 8rpx 0; }
+.star-icon { font-size: 32rpx; color: var(--border); margin: 0 4rpx; }
+.star-icon.active { color: #FFB800; }
+.overview-total { font-size: 24rpx; color: var(--text-light); }
+.overview-right { display: flex; align-items: center; color: var(--text-secondary); font-size: 26rpx; }
+.overview-right .arrow { margin-left: 8rpx; font-size: 32rpx; }
+
+/* 写评价按钮 */
+.write-review-bar { padding: 20rpx 0 120rpx; text-align: center; }
+.btn-write-review { background: var(--primary); color: white; border-radius: 40rpx; font-size: 28rpx; padding: 16rpx 60rpx; border: none; }
+
+.tab-content { padding-bottom: 150rpx; }
+
+/* 日历 + 时间选择 */
+.time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20rpx; }
+.time-slot { text-align: center; padding: 24rpx; border-radius: 12rpx; background: white; border: 2rpx solid var(--border); font-size: 26rpx; }
+.time-slot.active { border-color: var(--primary); color: var(--primary); background: rgba(255,107,107,0.05); }
+.time-slot.disabled { background: var(--bg); color: var(--text-light); border-color: var(--bg); }
+.selected-date-hint { margin-top: 20rpx; padding: 16rpx; background: rgba(255,107,107,0.06); border-radius: 8rpx; text-align: center; font-size: 26rpx; color: var(--primary); }
+
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 20rpx 30rpx; padding-bottom: calc(20rpx + env(safe-area-inset-bottom)); background: white; box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.05); z-index: 100; }
+.bottom-left { flex: 1; }
+.bottom-right { display: flex; align-items: center; gap: 20rpx; }
+/* 底部操作按钮组 */
+.btn-icon-box { display: flex; flex-direction: column; align-items: center; min-width: 80rpx; }
+.btn-icon-emoji { font-size: 36rpx; }
+.fav-icon { font-size: 36rpx; }
+.fav-icon.fav-active { animation: fav-pop 0.3s ease; }
+.btn-icon-label { font-size: 20rpx; color: var(--text-secondary); margin-top: 4rpx; }
+.bottom-btn { padding: 16rpx 40rpx; }
+
+@keyframes fav-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}

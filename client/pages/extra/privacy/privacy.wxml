@@ -1,0 +1,92 @@
+<!-- pages/privacy/privacy.wxml -->
+<view class="container">
+  <view class="content">
+    <text class="last-update">最后更新日期：{{lastUpdate}}</text>
+
+    <view class="section">
+      <text class="section-title">一、信息收集</text>
+      <text class="section-content">
+        为向您提供上门健身服务，我们可能会收集以下信息：
+
+        1. 账户信息：您在使用微信登录时授权获取的昵称、头像等基本信息；
+        2. 联系方式：您填写的手机号码用于教练与您联系预约服务；
+        3. 位置信息：您授权的位置信息用于推荐附近的健身教练；
+        4. 健康信息：您主动填写的身体状况、健身目标等信息，用于教练制定训练计划；
+        5. 订单信息：您预约课程的时间、地点等信息。
+      </text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">二、信息使用</text>
+      <text class="section-content">
+        我们承诺将您的信息用于以下目的：
+
+        1. 提供、维护和改进我们的服务；
+        2. 处理您的预约请求和订单；
+        3. 向您发送服务相关的通知（如预约提醒）；
+        4. 教练根据您提供的信息制定个性化训练方案；
+        5. 响应您的咨询和反馈。
+      </text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">三、信息共享</text>
+      <text class="section-content">
+        除以下情况外，我们不会与第三方共享您的个人信息：
+
+        1. 已获得您的明确同意；
+        2. 为向您提供服务，必要情况下与教练共享（仅限预约所需信息）；
+        3. 依据法律法规要求或政府主管部门要求；
+        4. 用于微信支付等必须的功能服务商。
+      </text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">四、信息安全</text>
+      <text class="section-content">
+        我们采用行业标准的安全措施保护您的个人信息，包括：
+
+        1. 数据传输加密（HTTPS）；
+        2. 严格访问控制；
+        3. 定期安全审查。
+
+        请您注意，互联网传输存在固有风险，我们无法保证100%的安全。
+      </text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">五、您的权利</text>
+      <text class="section-content">
+        您对您的个人信息享有以下权利：
+
+        1. 访问权：查看您的个人信息；
+        2. 更正权：更正不准确的个人信息；
+        3. 删除权：要求删除您的账户和个人信息（法律保留情况除外）；
+        4. 撤回同意：随时撤回您的授权同意。
+      </text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">六、联系我们</text>
+      <text class="section-content">
+        如您对本隐私政策有任何疑问，请通过以下方式联系我们：
+
+        邮箱：service@homefitness.com
+        （点击复制邮箱地址）
+
+        我们将在15个工作日内回复您的请求。
+      </text>
+      <view class="contact-btn">
+        <button class="btn-copy" bindtap="onCopyContact" size="mini">复制邮箱地址</button>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">七、变更通知</text>
+      <text class="section-content">
+        我们可能会不时更新本隐私政策。重大变更时，我们将在小程序内显著位置提醒您。请您定期查阅最新版本。
+      </text>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,72 @@
+<!--pages/user/appointments.wxml-->
+<view class="container">
+  <!-- 标签页 -->
+  <view class="tabs-header">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab-item {{currentTab === item.key ? 'active' : ''}}"
+      bindtap="onTabChange"
+      data-tab="{{item.key}}"
+    >{{item.name}}</view>
+  </view>
+
+  <!-- 预约列表 -->
+  <view class="appointments-list">
+    <view wx:if="{{loading}}" class="loading-state">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <block wx:elif="{{appointments.length}}">
+      <view
+        wx:for="{{appointments}}"
+        wx:key="id"
+        class="appointment-card"
+        bindtap="onAppointmentTap"
+        data-id="{{item.id}}"
+      >
+        <view class="appointment-header">
+          <view class="coach-info">
+            <image class="coach-avatar" src="{{item.coachAvatar}}" mode="aspectFill"></image>
+            <text class="coach-name">{{item.coachName}}</text>
+          </view>
+          <text class="appointment-status {{currentTab}}">{{currentTabName}}</text>
+        </view>
+
+        <view class="appointment-content">
+          <text class="course-title">{{item.courseTitle}}</text>
+          <view class="appointment-time">
+            <text>{{item.date}} {{item.time}}</text>
+          </view>
+          <view class="appointment-address">
+            <text>{{item.address}}</text>
+          </view>
+        </view>
+
+        <view class="appointment-footer">
+          <text class="price">¥{{item.price}}</text>
+          <view class="action-btns">
+            <block wx:if="{{currentTab === 'upcoming'}}">
+              <view class="btn-outline btn-small" catchtap="onCancel" data-id="{{item.id}}">取消</view>
+              <view class="btn-primary btn-small" catchtap="onContact" data-id="{{item.id}}">联系教练</view>
+            </block>
+            <block wx:elif="{{currentTab === 'completed'}}">
+              <view class="btn-outline btn-small" catchtap="onRebook" data-id="{{item.id}}">再次预约</view>
+            </block>
+            <block wx:elif="{{currentTab === 'cancelled'}}">
+              <view class="btn-outline btn-small" catchtap="onRebook" data-id="{{item.id}}">重新预约</view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view wx:else class="empty-state">
+      <text class="empty-icon">📅</text>
+      <text class="empty-text">暂无{{currentTabName}}预约</text>
+      <view class="btn-primary" bindtap="onGoBooking">去预约</view>
+    </view>
+  </view>
+</view>

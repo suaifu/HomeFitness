@@ -1,0 +1,143 @@
+<!--pages/user/settings/settings.wxml - 设置页面-->
+<view class="container">
+  <!-- 消息通知 -->
+  <view class="section">
+    <view class="section-title">消息通知</view>
+    <view class="card">
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-icon">🔔</text>
+          <view class="setting-info">
+            <text class="setting-title">预约提醒</text>
+            <text class="setting-desc">教练确认、即将开始等通知</text>
+          </view>
+        </view>
+        <switch checked="{{settings.notifications}}" data-setting="notifications" bindchange="onToggleSetting" color="#FF6B6B" />
+      </view>
+
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-icon">🎯</text>
+          <view class="setting-info">
+            <text class="setting-title">个性化推荐</text>
+            <text class="setting-desc">根据您的健身偏好推荐课程</text>
+          </view>
+        </view>
+        <switch checked="{{settings.personalized}}" data-setting="personalized" bindchange="onToggleSetting" color="#FF6B6B" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 隐私设置 -->
+  <view class="section">
+    <view class="section-title">隐私设置</view>
+    <view class="card">
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-icon">📍</text>
+          <view class="setting-info">
+            <text class="setting-title">位置服务</text>
+            <text class="setting-desc">获取您的位置以推荐附近教练</text>
+          </view>
+        </view>
+        <switch checked="{{settings.locationService}}" data-setting="locationService" bindchange="onToggleSetting" color="#FF6B6B" />
+      </view>
+
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-icon">🏃</text>
+          <view class="setting-info">
+            <text class="setting-title">微信运动数据</text>
+            <text class="setting-desc">同步运动数据以制定训练计划</text>
+          </view>
+        </view>
+        <switch checked="{{settings.wechatRunData}}" data-setting="wechatRunData" bindchange="onToggleSetting" color="#FF6B6B" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 通用设置 -->
+  <view class="section">
+    <view class="section-title">通用设置</view>
+    <view class="card">
+      <view class="setting-item arrow" bindtap="onClearCache">
+        <view class="setting-left">
+          <text class="setting-icon">🗑️</text>
+          <view class="setting-info">
+            <text class="setting-title">清除缓存</text>
+            <text class="setting-desc">当前缓存：{{cacheSize}}</text>
+          </view>
+        </view>
+        <text class="iconfont icon-right text-light"></text>
+      </view>
+
+      <view class="setting-item arrow" bindtap="onCheckUpdate">
+        <view class="setting-left">
+          <text class="setting-icon">🔄</text>
+          <view class="setting-info">
+            <text class="setting-title">检查更新</text>
+            <text class="setting-desc">当前版本 v{{version}}</text>
+          </view>
+        </view>
+        <text class="text-sm text-light">v{{version}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="section">
+    <view class="section-title">关于</view>
+    <view class="card">
+      <view class="setting-item arrow" bindtap="onAboutUs">
+        <view class="setting-left">
+          <text class="setting-icon">ℹ️</text>
+          <text class="setting-title">关于我们</text>
+        </view>
+        <text class="iconfont icon-right text-light"></text>
+      </view>
+
+      <view class="setting-item arrow" bindtap="onContactService">
+        <view class="setting-left">
+          <text class="setting-icon">📞</text>
+          <text class="setting-title">联系客服</text>
+        </view>
+        <text class="iconfont icon-right text-light"></text>
+      </view>
+
+      <view class="setting-item arrow" bindtap="onFAQ">
+        <view class="setting-left">
+          <text class="setting-icon">❓</text>
+          <text class="setting-title">常见问题</text>
+        </view>
+        <text class="iconfont icon-right text-light"></text>
+      </view>
+
+      <view class="setting-item arrow" bindtap="onPrivacyPolicy">
+        <view class="setting-left">
+          <text class="setting-icon">🔒</text>
+          <text class="setting-title">隐私政策</text>
+        </view>
+        <text class="iconfont icon-right text-light"></text>
+      </view>
+
+      <view class="setting-item no-border arrow" bindtap="onUserAgreement">
+        <view class="setting-left">
+          <text class="setting-icon">📄</text>
+          <text class="setting-title">用户协议</text>
+        </view>
+        <text class="iconfont icon-right text-light"></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section">
+    <view class="logout-btn" bindtap="onLogout">退出登录</view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>上门健身 v{{version}}</text>
+    <text class="text-light">© 2026 HomeFitness</text>
+  </view>
+</view>

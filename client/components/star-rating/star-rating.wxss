@@ -1,0 +1,47 @@
+/* components/star-rating/star-rating.wxss */
+.star-rating {
+  display: flex;
+  align-items: center;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+}
+
+.star-item {
+  position: relative;
+}
+
+.star {
+  line-height: 1;
+  font-size: inherit;
+}
+
+.star-full {
+  color: #FFB800;
+}
+
+.star-empty {
+  color: #E0E0E0;
+}
+
+.star-half {
+  position: relative;
+  color: #E0E0E0;
+}
+
+.star-half-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #FFB800;
+  overflow: hidden;
+  width: 50%;
+}
+
+.rating-text {
+  margin-left: 16rpx;
+  font-size: 28rpx;
+  color: #666;
+}

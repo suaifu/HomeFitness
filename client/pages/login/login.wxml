@@ -1,0 +1,119 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+  <!-- 顶部背景 -->
+  <view class="header-bg">
+    <view class="logo-area">
+      <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+      <text class="app-name">上门健身</text>
+      <text class="app-slogan">专业私教，上门服务</text>
+    </view>
+  </view>
+
+  <!-- 登录区域 -->
+  <view class="login-area">
+    <!-- 登录方式切换 -->
+    <view class="login-tabs">
+      <view 
+        class="tab-item {{loginType === 'wechat' ? 'active' : ''}}" 
+        data-type="wechat"
+        bindtap="switchLoginType"
+      >
+        <text class="tab-icon">微信</text>
+      </view>
+      <view 
+        class="tab-item {{loginType === 'phone' ? 'active' : ''}}" 
+        data-type="phone"
+        bindtap="switchLoginType"
+      >
+        <text class="tab-icon">手机号</text>
+      </view>
+    </view>
+
+    <!-- 微信登录 -->
+    <block wx:if="{{loginType === 'wechat'}}">
+      <view class="login-form">
+        <button 
+          class="btn-wechat" 
+          open-type="getPhoneNumber" 
+          bindgetphonenumber="onGetPhoneNumber"
+          disabled="{{loading}}"
+        >
+          <text class="btn-icon">微信</text>
+          <text class="btn-text">微信一键登录</text>
+        </button>
+        
+        <button class="btn-wechat-outline" bindtap="onWechatLogin" disabled="{{loading}}">
+          <text class="btn-icon-outline">W</text>
+          <text class="btn-text-outline">仅获取昵称头像登录</text>
+        </button>
+      </view>
+    </block>
+
+    <!-- 手机号登录 -->
+    <block wx:if="{{loginType === 'phone'}}">
+      <view class="login-form">
+        <!-- 手机号输入 -->
+        <view class="input-group">
+          <text class="input-label">+86</text>
+          <input 
+            class="input-field" 
+            type="number" 
+            maxlength="11" 
+            placeholder="请输入手机号"
+            value="{{phoneNumber}}"
+            bindinput="onPhoneInput"
+          />
+        </view>
+        
+        <!-- 验证码输入 -->
+        <view class="input-group">
+          <text class="input-label">验证码</text>
+          <input 
+            class="input-field verify-code" 
+            type="number" 
+            maxlength="6" 
+            placeholder="请输入验证码"
+            value="{{verifyCode}}"
+            bindinput="onVerifyCodeInput"
+          />
+          <view 
+            class="verify-code-btn {{verifyCodeDisabled ? 'disabled' : ''}}"
+            bindtap="onGetVerifyCode"
+          >
+            <text>{{verifyCodeText}}</text>
+          </view>
+        </view>
+        
+        <!-- 登录按钮 -->
+        <button class="btn-login" bindtap="onPhoneLogin" disabled="{{loading}}">
+          <text wx:if="{{!loading}}">登录</text>
+          <text wx:if="{{loading}}">登录中...</text>
+        </button>
+      </view>
+    </block>
+
+    <!-- 协议勾选 -->
+    <view class="agreement-area">
+      <view class="checkbox-group" bindtap="onPrivacyChange">
+        <checkbox-group>
+          <label class="checkbox-label">
+            <checkbox value="privacy" color="#FF6B6B"/>
+            <text class="checkbox-text">我已阅读并同意</text>
+          </label>
+        </checkbox-group>
+      </view>
+      <view class="agreement-links">
+        <text class="link" bindtap="onViewPrivacy">《隐私政策》</text>
+        <text class="link-separator">和</text>
+        <text class="link" bindtap="onViewTerms">《用户服务协议》</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="footer">
+    <view class="skip-btn" bindtap="onSkip">
+      <text>跳过登录，先看看</text>
+    </view>
+  </view>
+</view>

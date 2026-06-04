@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "教练详情",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "calendar": "/components/calendar/calendar",
+    "share-poster": "/components/share-poster/share-poster"
+  }
+}

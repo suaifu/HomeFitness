@@ -1,0 +1,29 @@
+<!--components/share-poster/share-poster.wxml-->
+<view class="poster-mask" wx:if="{{show}}" bindtap="onClose">
+  <view class="poster-container" catchtap="noop">
+    <!-- Canvas 画布（离屏绘制） -->
+    <canvas
+      type="2d"
+      id="posterCanvas"
+      class="poster-canvas"
+      style="width:{{canvasWidth}}px;height:{{canvasHeight}}px;"
+    ></canvas>
+
+    <!-- 预览图 -->
+    <view class="poster-preview" wx:if="{{posterUrl}}">
+      <image class="poster-image" src="{{posterUrl}}" mode="widthFix" show-menu-by-longpress></image>
+    </view>
+
+    <!-- 绘制中 -->
+    <view class="poster-drawing" wx:elif="{{isDrawing}}">
+      <view class="drawing-spinner"></view>
+      <text class="drawing-text">生成海报中...</text>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="poster-actions" wx:if="{{posterUrl}}">
+      <view class="btn-save" bindtap="onSaveToAlbum">保存到相册</view>
+      <view class="btn-close-poster" bindtap="onClose">关闭</view>
+    </view>
+  </view>
+</view>

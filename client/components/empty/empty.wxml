@@ -1,0 +1,8 @@
+<!-- 占位组件 - 空状态 -->
+<view class="empty-placeholder">
+  <view class="empty-icon-wrapper">
+    <view class="empty-circle"></view>
+  </view>
+  <view class="empty-text-placeholder"></view>
+  <view class="empty-btn-placeholder"></view>
+</view>
