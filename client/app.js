@@ -67,7 +67,7 @@ App({
         this.globalData.apiBaseUrl = 'https://trial-api.fitness.com';
         break;
       default:
-        this.globalData.apiBaseUrl = 'http://localhost:3001';
+        this.globalData.apiBaseUrl = 'http://localhost:3000';
     }
   },
 
