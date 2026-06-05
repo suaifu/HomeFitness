@@ -4,19 +4,44 @@
 
 ## 截图预览
 
-<p align="center">
-  <img src="docs/screenshots/home.png" alt="首页" width="200" />
-  <img src="docs/screenshots/coach-list.png" alt="教练列表" width="200" />
-  <img src="docs/screenshots/coach-detail.png" alt="教练详情" width="200" />
-  <img src="docs/screenshots/order.png" alt="订单页面" width="200" />
-</p>
-
-<p align="center">
-  <img src="docs/screenshots/booking.png" alt="预约日历" width="200" />
-  <img src="docs/screenshots/profile.png" alt="个人中心" width="200" />
-  <img src="docs/screenshots/review.png" alt="评价页面" width="200" />
-  <img src="docs/screenshots/favorites.png" alt="我的收藏" width="200" />
-</p>
+<table align="center">
+  <tr>
+    <td align="center" valign="top" width="25%">
+      <img src="docs/screenshots/home.png" alt="首页" width="100%" />
+      <br/><sub>首页</sub>
+    </td>
+    <td align="center" valign="top" width="25%">
+      <img src="docs/screenshots/coach-list.png" alt="教练列表" width="100%" />
+      <br/><sub>教练列表</sub>
+    </td>
+    <td align="center" valign="top" width="25%">
+      <img src="docs/screenshots/coach-detail.png" alt="教练详情" width="100%" />
+      <br/><sub>教练详情</sub>
+    </td>
+    <td align="center" valign="top" width="25%">
+      <img src="docs/screenshots/order.png" alt="订单页面" width="100%" />
+      <br/><sub>订单页面</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="25%">
+      <img src="docs/screenshots/booking.png" alt="预约日历" width="100%" />
+      <br/><sub>预约日历</sub>
+    </td>
+    <td align="center" valign="top" width="25%">
+      <img src="docs/screenshots/profile.png" alt="个人中心" width="100%" />
+      <br/><sub>个人中心</sub>
+    </td>
+    <td align="center" valign="top" width="25%">
+      <img src="docs/screenshots/review.png" alt="评价页面" width="100%" />
+      <br/><sub>评价页面</sub>
+    </td>
+    <td align="center" valign="top" width="25%">
+      <img src="docs/screenshots/favorites.png" alt="我的收藏" width="100%" />
+      <br/><sub>我的收藏</sub>
+    </td>
+  </tr>
+</table>
 
 > 📸 截图更新中，欢迎 PR 补充真实截图
 
