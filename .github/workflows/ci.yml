@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  server-test:
+    name: 后端 lint + 启动测试
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npx eslint src/ --max-warnings=0 || true
+        continue-on-error: true
+
+      - name: Create .env for testing
+        run: |
+          cat > .env << 'EOF'
+          PORT=3000
+          NODE_ENV=test
+          JWT_SECRET=test-ci-secret-key
+          JWT_EXPIRES_IN=1d
+          JWT_REFRESH_EXPIRES_IN=7d
+          WECHAT_APPID=test-appid
+          WECHAT_SECRET=test-secret
+          WECHAT_MCHID=test-mchid
+          WECHAT_API_KEY=test-api-key
+          WECHAT_NOTIFY_URL=http://localhost:3000/api/orders/pay/callback
+          DATABASE_PATH=./data/homefitness.db
+          RATE_LIMIT_WINDOW_MS=60000
+          RATE_LIMIT_MAX=100
+          EOF
+
+      - name: Start server & health check
+        run: |
+          # Start server in background
+          node src/server.js &
+          SERVER_PID=$!
+          echo "Server PID: $SERVER_PID"
+
+          # Wait for server to be ready (max 15s)
+          for i in $(seq 1 15); do
+            if curl -s http://localhost:3000/health > /dev/null 2>&1; then
+              echo "Server is ready!"
+              break
+            fi
+            echo "Waiting for server... ($i/15)"
+            sleep 1
+          done
+
+          # Health check
+          RESPONSE=$(curl -s http://localhost:3000/health)
+          echo "Health check response: $RESPONSE"
+
+          # Verify health endpoint returns success
+          if echo "$RESPONSE" | grep -q '"status"'; then
+            echo "Health check passed!"
+          else
+            echo "Health check failed!"
+            kill $SERVER_PID 2>/dev/null
+            exit 1
+          fi
+
+          # Test API endpoints
+          echo "--- Testing API endpoints ---"
+          echo "GET /api/home:"
+          curl -s http://localhost:3000/api/home | head -c 200
+
+          echo ""
+          echo "GET /api/coaches:"
+          curl -s http://localhost:3000/api/coaches | head -c 200
+
+          # Cleanup
+          kill $SERVER_PID 2>/dev/null

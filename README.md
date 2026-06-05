@@ -2,6 +2,24 @@
 
 专业教练上门健身服务的微信小程序全栈项目。
 
+## 截图预览
+
+<p align="center">
+  <img src="docs/screenshots/home.png" alt="首页" width="200" />
+  <img src="docs/screenshots/coach-list.png" alt="教练列表" width="200" />
+  <img src="docs/screenshots/coach-detail.png" alt="教练详情" width="200" />
+  <img src="docs/screenshots/order.png" alt="订单页面" width="200" />
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/booking.png" alt="预约日历" width="200" />
+  <img src="docs/screenshots/profile.png" alt="个人中心" width="200" />
+  <img src="docs/screenshots/review.png" alt="评价页面" width="200" />
+  <img src="docs/screenshots/favorites.png" alt="我的收藏" width="200" />
+</p>
+
+> 📸 截图更新中，欢迎 PR 补充真实截图
+
 ## 项目结构
 
 ```
