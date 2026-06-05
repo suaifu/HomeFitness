@@ -4,42 +4,50 @@
 
 ## 截图预览
 
-<table align="center">
+<table align="center" border="0" cellspacing="0" cellpadding="0">
+  <!-- 第一行：图片底部对齐 -->
   <tr>
-    <td align="center" valign="top" width="25%">
-      <img src="docs/screenshots/home.png" alt="首页" width="100%" />
-      <div style="height:24px;line-height:24px;margin-top:4px;font-size:14px;color:#666;">首页</div>
+    <td align="center" valign="bottom" width="25%" style="padding:4px;">
+      <img src="docs/screenshots/home.png" alt="首页" width="95%" />
     </td>
-    <td align="center" valign="top" width="25%">
-      <img src="docs/screenshots/coach-list.png" alt="教练列表" width="100%" />
-      <div style="height:24px;line-height:24px;margin-top:4px;font-size:14px;color:#666;">教练列表</div>
+    <td align="center" valign="bottom" width="25%" style="padding:4px;">
+      <img src="docs/screenshots/coach-list.png" alt="教练列表" width="95%" />
     </td>
-    <td align="center" valign="top" width="25%">
-      <img src="docs/screenshots/coach-detail.png" alt="教练详情" width="100%" />
-      <div style="height:24px;line-height:24px;margin-top:4px;font-size:14px;color:#666;">教练详情</div>
+    <td align="center" valign="bottom" width="25%" style="padding:4px;">
+      <img src="docs/screenshots/coach-detail.png" alt="教练详情" width="95%" />
     </td>
-    <td align="center" valign="top" width="25%">
-      <img src="docs/screenshots/order.png" alt="订单页面" width="100%" />
-      <div style="height:24px;line-height:24px;margin-top:4px;font-size:14px;color:#666;">订单页面</div>
+    <td align="center" valign="bottom" width="25%" style="padding:4px;">
+      <img src="docs/screenshots/order.png" alt="订单页面" width="95%" />
     </td>
   </tr>
+  <!-- 第二行：文字说明顶部对齐 -->
   <tr>
-    <td align="center" valign="top" width="25%">
-      <img src="docs/screenshots/booking.png" alt="预约日历" width="100%" />
-      <div style="height:24px;line-height:24px;margin-top:4px;font-size:14px;color:#666;">预约日历</div>
+    <td align="center" style="padding:8px 4px 20px; font-size:14px; color:#666;">首页</td>
+    <td align="center" style="padding:8px 4px 20px; font-size:14px; color:#666;">教练列表</td>
+    <td align="center" style="padding:8px 4px 20px; font-size:14px; color:#666;">教练详情</td>
+    <td align="center" style="padding:8px 4px 20px; font-size:14px; color:#666;">订单页面</td>
+  </tr>
+  <!-- 第三行：图片底部对齐 -->
+  <tr>
+    <td align="center" valign="bottom" width="25%" style="padding:4px;">
+      <img src="docs/screenshots/booking.png" alt="预约日历" width="95%" />
     </td>
-    <td align="center" valign="top" width="25%">
-      <img src="docs/screenshots/profile.png" alt="个人中心" width="100%" />
-      <div style="height:24px;line-height:24px;margin-top:4px;font-size:14px;color:#666;">个人中心</div>
+    <td align="center" valign="bottom" width="25%" style="padding:4px;">
+      <img src="docs/screenshots/profile.png" alt="个人中心" width="95%" />
     </td>
-    <td align="center" valign="top" width="25%">
-      <img src="docs/screenshots/review.png" alt="评价页面" width="100%" />
-      <div style="height:24px;line-height:24px;margin-top:4px;font-size:14px;color:#666;">评价页面</div>
+    <td align="center" valign="bottom" width="25%" style="padding:4px;">
+      <img src="docs/screenshots/review.png" alt="评价页面" width="95%" />
     </td>
-    <td align="center" valign="top" width="25%">
-      <img src="docs/screenshots/favorites.png" alt="我的收藏" width="100%" />
-      <div style="height:24px;line-height:24px;margin-top:4px;font-size:14px;color:#666;">我的收藏</div>
+    <td align="center" valign="bottom" width="25%" style="padding:4px;">
+      <img src="docs/screenshots/favorites.png" alt="我的收藏" width="95%" />
     </td>
+  </tr>
+  <!-- 第四行：文字说明顶部对齐 -->
+  <tr>
+    <td align="center" style="padding:8px 4px; font-size:14px; color:#666;">预约日历</td>
+    <td align="center" style="padding:8px 4px; font-size:14px; color:#666;">个人中心</td>
+    <td align="center" style="padding:8px 4px; font-size:14px; color:#666;">评价页面</td>
+    <td align="center" style="padding:8px 4px; font-size:14px; color:#666;">我的收藏</td>
   </tr>
 </table>
 
