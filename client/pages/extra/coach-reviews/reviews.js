@@ -76,8 +76,15 @@ Page({
         stats.total
       );
 
+      // 格式化评价数据：标签解析 + 时间格式化（WXML 不能调 JS 函数）
+      const processedReviews = (reviews || []).map(review => ({
+        ...review,
+        _formattedTags: reviewsService.formatTags(review.tags),
+        _timeText: this.formatTime(review.created_at)
+      }));
+
       this.setData({
-        reviews: isLoadMore ? [...this.data.reviews, ...reviews] : reviews,
+        reviews: isLoadMore ? [...this.data.reviews, ...processedReviews] : processedReviews,
         stats,
         distributionPercent,
         hasMore: pagination.page < pagination.totalPages,

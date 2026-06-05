@@ -9,10 +9,14 @@ Page({
     bookingId: null,  // 可选的预约ID
     // 评分
     rating: 5,
+    // 评分描述
+    ratingText: '非常满意',
     // 评价内容
     content: '',
     // 选中的标签
     selectedTags: [],
+    // 标签选中状态 Map（供 WXML 使用，小程序不支持 Array.includes）
+    selectedTagMap: {},
     // 是否正在提交
     submitting: false,
     // 标签列表
@@ -38,7 +42,9 @@ Page({
 
   // 评分变化
   onRatingChange(e) {
-    this.setData({ rating: e.detail.value });
+    const rating = e.detail.value;
+    const ratingTexts = { 1: '很不满意', 2: '不满意', 3: '一般', 4: '满意', 5: '非常满意' };
+    this.setData({ rating, ratingText: ratingTexts[rating] || '' });
   },
 
   // 内容输入
@@ -63,7 +69,11 @@ Page({
       selectedTags.push(tagId);
     }
 
-    this.setData({ selectedTags });
+    // 构建 selectedTagMap 供 WXML 模板使用（小程序不支持 Array.includes）
+    const selectedTagMap = {};
+    selectedTags.forEach(id => { selectedTagMap[id] = true; });
+
+    this.setData({ selectedTags, selectedTagMap });
   },
 
   // 获取标签文字

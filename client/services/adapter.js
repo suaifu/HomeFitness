@@ -97,11 +97,39 @@ function adaptReviews(res) {
 
 /**
  * 格式化标签字符串为数组
+ * 支持两种格式：
+ * 1. JSON 字符串：'["professional","skillful"]' → ['专业','技巧好']
+ * 2. 逗号分隔：'专业, 技巧好' → ['专业','技巧好']
  */
+const REVIEW_TAG_MAP = {
+  professional: '专业',
+  patient: '耐心',
+  effective: '效果明显',
+  on_time: '准时',
+  friendly: '亲切',
+  skillful: '技巧好',
+  knowledgeable: '知识丰富',
+  flexible: '灵活变通'
+};
+
 function formatTags(tags) {
   if (!tags) return [];
-  if (Array.isArray(tags)) return tags;
-  if (typeof tags === 'string') return tags.split(',').map(t => t.trim()).filter(Boolean);
+  if (Array.isArray(tags)) {
+    return tags.map(id => REVIEW_TAG_MAP[id] || id);
+  }
+  if (typeof tags === 'string') {
+    // 尝试 JSON 解析（后端存储的格式）
+    try {
+      const parsed = JSON.parse(tags);
+      if (Array.isArray(parsed)) {
+        return parsed.map(id => REVIEW_TAG_MAP[id] || id);
+      }
+    } catch (e) {
+      // 不是 JSON，按逗号分割
+    }
+    // 逗号分隔格式
+    return tags.split(',').map(t => t.trim()).filter(Boolean);
+  }
   return [];
 }
 

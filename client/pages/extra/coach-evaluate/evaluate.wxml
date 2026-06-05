@@ -34,7 +34,7 @@
       <view
         wx:for="{{tags}}"
         wx:key="id"
-        class="tag-item {{selectedTags.includes(item.id) ? 'selected' : ''}}"
+        class="tag-item {{selectedTagMap[item.id] ? 'selected' : ''}}"
         data-id="{{item.id}}"
         bindtap="onTagTap"
       >

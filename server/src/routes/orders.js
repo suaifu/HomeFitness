@@ -78,13 +78,20 @@ router.get('/', authMiddleware, (req, res) => {
 
     const orders = Order.findByUserId(req.userId, status !== undefined ? parseInt(status) : undefined);
 
-    // 为每个订单添加详细信息
+    // 为每个订单添加详细信息（平铺为前端期望的字段格式）
     const processedOrders = orders.map(order => {
       const booking = Booking.findById(order.booking_id);
       const coach = booking ? Coach.findById(booking.coach_id) : null;
-      
+
       return {
         ...order,
+        // 平铺字段，适配前端 WXML 期望的命名
+        courseTitle: booking?.course_name || '私教课程',
+        coachName: booking?.coach_name || (coach?.name || ''),
+        coachAvatar: booking?.coach_avatar || (coach?.avatar || ''),
+        date: booking?.booking_date || '',
+        time: booking?.booking_time || '',
+        total: order.amount,
         statusText: ['待支付', '已支付', '已完成', '已取消'][order.status] || '未知',
         booking,
         coach: coach ? {
@@ -131,6 +138,13 @@ router.get('/:id', authMiddleware, (req, res) => {
 
     const processedOrder = {
       ...order,
+      // 平铺字段，适配前端 WXML 期望的命名
+      courseTitle: booking?.course_name || '私教课程',
+      coachName: booking?.coach_name || (coach?.name || ''),
+      coachAvatar: booking?.coach_avatar || (coach?.avatar || ''),
+      date: booking?.booking_date || '',
+      time: booking?.booking_time || '',
+      total: order.amount,
       statusText: ['待支付', '已支付', '已完成', '已取消'][order.status] || '未知',
       booking,
       coach: coach ? {

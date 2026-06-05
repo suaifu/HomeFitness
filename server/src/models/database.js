@@ -368,6 +368,74 @@ function seedData() {
   console.log('✅ 种子数据初始化完成');
 }
 
+/**
+ * 初始化评价种子数据（独立函数，可在启动后调用）
+ */
+function seedReviews() {
+  // 检查是否已有评价
+  const result = db.exec('SELECT COUNT(*) as count FROM reviews');
+  const count = result.length > 0 ? result[0].values[0][0] : 0;
+  if (count > 0) {
+    console.log('📦 评价种子数据已存在，跳过');
+    return;
+  }
+
+  console.log('📦 正在初始化评价种子数据...');
+
+  // 先确保有测试用户
+  const userResult = db.exec('SELECT id FROM users LIMIT 1');
+  if (userResult.length === 0 || userResult[0].values.length === 0) {
+    // 创建测试用户
+    db.run(`INSERT INTO users (openid, nickname, avatar_url, phone, gender)
+            VALUES ('test_reviewer_1', '健身达人小王', '/images/default-avatar.png', '13900139001', 1)`);
+    db.run(`INSERT INTO users (openid, nickname, avatar_url, phone, gender)
+            VALUES ('test_reviewer_2', '瑜伽爱好者', '/images/default-avatar.png', '13900139002', 2)`);
+    db.run(`INSERT INTO users (openid, nickname, avatar_url, phone, gender)
+            VALUES ('test_reviewer_3', '运动小白', '/images/default-avatar.png', '13900139003', 1)`);
+    db.run(`INSERT INTO users (openid, nickname, avatar_url, phone, gender)
+            VALUES ('test_reviewer_4', '减脂战士', '/images/default-avatar.png', '13900139004', 2)`);
+    db.run(`INSERT INTO users (openid, nickname, avatar_url, phone, gender)
+            VALUES ('test_reviewer_5', '力量训练者', '/images/default-avatar.png', '13900139005', 1)`);
+  }
+
+  const reviews = [
+    // 李明教练 (coach_id=1) 的评价
+    { user_id: 1, coach_id: 1, rating: 5, content: '李明教练非常专业，训练计划科学合理，每次训练都有明显进步。特别是减脂方面，一个月瘦了5斤！', tags: '["professional","effective","patient"]' },
+    { user_id: 2, coach_id: 1, rating: 5, content: '跟着李教练训练三个月了，增肌效果非常明显。教练会根据我的身体状况调整训练强度，非常贴心。', tags: '["professional","skillful","knowledgeable"]' },
+    { user_id: 3, coach_id: 1, rating: 4, content: '教练很专业，动作指导很到位，就是有时候课程会稍微超时，不过整体体验很好。', tags: '["professional","patient"]' },
+
+    // 王芳教练 (coach_id=2) 的评价
+    { user_id: 1, coach_id: 2, rating: 5, content: '王芳教练的瑜伽课太棒了！每次上完课都觉得身心放松，睡眠质量也改善了很多。强烈推荐给压力大的上班族。', tags: '["patient","friendly","effective"]' },
+    { user_id: 4, coach_id: 2, rating: 5, content: '产后恢复选择了王教练，非常温柔耐心，训练计划循序渐进，恢复效果超预期！', tags: '["patient","knowledgeable","friendly"]' },
+    { user_id: 3, coach_id: 2, rating: 4, content: '瑜伽课很舒服，教练会细心纠正每一个动作。希望可以多一些冥想环节。', tags: '["patient","professional"]' },
+
+    // 张伟教练 (coach_id=3) 的评价
+    { user_id: 5, coach_id: 3, rating: 5, content: '张教练是真正的运动康复专家！我的肩颈问题困扰了很久，经过系统训练已经好了很多。', tags: '["professional","knowledgeable","effective"]' },
+    { user_id: 2, coach_id: 3, rating: 4, content: '体态矫正课程很有针对性，能准确找到问题所在并给出专业建议。', tags: '["professional","skillful"]' },
+    { user_id: 4, coach_id: 3, rating: 5, content: '拉伸放松课非常舒服，运动后恢复效果很好。教练手法专业，还会教自己在家也能做的拉伸动作。', tags: '["professional","patient","flexible"]' },
+
+    // 刘洋教练 (coach_id=4) 的评价
+    { user_id: 3, coach_id: 4, rating: 5, content: '刘教练年轻有活力，HIIT课燃脂效率超高！一节课下来大汗淋漓但特别爽，已经推荐给朋友了。', tags: '["effective","on_time","friendly"]' },
+    { user_id: 5, coach_id: 4, rating: 4, content: '功能性训练很有意思，教练会设计很多有趣的训练组合，不会觉得枯燥。性价比很高。', tags: '["skillful","flexible","on_time"]' },
+    { user_id: 1, coach_id: 4, rating: 4, content: '体能提升课程效果不错，教练很准时，训练计划安排合理。作为入门教练性价比很高。', tags: '["on_time","effective"]' }
+  ];
+
+  reviews.forEach(r => {
+    db.run(
+      'INSERT INTO reviews (user_id, coach_id, rating, content, tags) VALUES (?, ?, ?, ?, ?)',
+      [r.user_id, r.coach_id, r.rating, r.content, r.tags]
+    );
+  });
+
+  // 更新教练评分
+  [1, 2, 3, 4].forEach(coachId => {
+    Review.updateCoachRating(coachId);
+  });
+
+  markDirty();
+  console.log(`✅ 评价种子数据初始化完成，共 ${reviews.length} 条`);
+}
+
 // ============ 辅助函数 ============
 
 function queryOne(sql, params = []) {
@@ -675,8 +743,9 @@ const Review = {
   updateCoachRating(coachId) {
     const result = queryOne('SELECT AVG(rating) as avg_rating, COUNT(*) as review_count FROM reviews WHERE coach_id = ?', [coachId]);
     if (result && result.avg_rating) {
-      run('UPDATE coaches SET rating = ?, review_count = ? WHERE id = ?',
-        [Math.round(result.avg_rating * 10) / 10, result.review_count, coachId]);
+      // coaches 表没有 review_count 列，只更新 rating
+      run('UPDATE coaches SET rating = ? WHERE id = ?',
+        [Math.round(result.avg_rating * 10) / 10, coachId]);
     }
   },
 
@@ -821,6 +890,7 @@ const Favorite = {
 
 module.exports = {
   initDatabase,
+  seedReviews,
   flushDatabase,
   User,
   Coach,

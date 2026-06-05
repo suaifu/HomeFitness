@@ -48,16 +48,17 @@
             />
           </view>
         </view>
-        <text class="review-time">{{formatTime(item.created_at)}}</text>
+        <text class="review-time">{{item._timeText}}</text>
       </view>
 
       <!-- 标签 -->
-      <view wx:if="{{item.tags}}" class="review-tags">
+      <view wx:if="{{item._formattedTags.length}}" class="review-tags">
         <text
           wx:for="{{item._formattedTags}}"
+          wx:for-item="tag"
           wx:key="{{index}}"
           class="tag"
-        >{{item}}</text>
+        >{{tag}}</text>
       </view>
 
       <!-- 内容 -->

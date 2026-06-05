@@ -7,7 +7,7 @@ const path = require('path');
 const crypto = require('crypto');
 require('dotenv').config();
 
-const { initDatabase, flushDatabase } = require('./models/database');
+const { initDatabase, seedReviews, flushDatabase } = require('./models/database');
 
 // ============ 限流器（内存实现，无需额外依赖）============
 const rateLimiter = {
@@ -89,6 +89,7 @@ function securityHeaders(req, res, next) {
 async function startServer() {
   // 初始化数据库
   await initDatabase();
+  seedReviews();
 
   const app = express();
 
